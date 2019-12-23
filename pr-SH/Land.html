@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上海信息</title>
+    <script src="./echarts/echarts.js"></script>
+    <script src="./echarts/shanghai.js"></script>
+    <script src="./js/fenquxy.js"></script>
+    <script src="./js/zhuzhaiCJ.js"></script>  
+    <script src="./js/dataland.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="js/fenquxy.js"></script>
+    <script src="js/CJFQ.js"></script>
+    <style type="text/css">
+          html,body{
+            width:100%;
+            height: 100%;
+            background-color: #fdfcff;
+            padding:0px;
+            margin:0px;
+            border:0px;
+            font-size: 12px;
+            overflow-x:hidden}
+           div#global{
+            width:100%;
+            height: 100%;
+            background-color: #fdfcff;
+            padding:0px;
+            margin:0px;
+            border:0px;
+            font-size: 12px;
+            }
+           .hrLine{
+               vertical-align:middle;
+               display:inline-block;
+               height:1px
+            }
+           .text{font-family:"KaiTi_GB2312";
+                 color:darkred;
+                 font-size: 13px;
+                 text-align:center;
+                 height: 10px;
+                 margin-left: 0px;
+                 margin-top: 0px;
+           }
+           .box{
+               width: 100%;
+               margin-left: 0;
+               margin-top: 0;
+               vertical-align:middle;
+               text-align: center;
+              }
+            /*定义头部布局，前面的div可以不用写，#号前面默认有个id，凡事定义了id的标签，都可以用#号来表示*/
+            #cartCJ{
+                width: 100%;
+                height: 100px;
+                background-color: #BB80F7;
+                bottom: 5px;
+                right: 1px;
+                text-align: center;
+                font-size:10px;
+                border-collapse: collapse;
+            }
+            #cartCJ td {
+	            font-size:10px;
+	            border:1px solid #fefffc;
+	            padding:3px 7px 2px 7px;}
+            #cartCJ caption{
+                font-size:10px;
+                margin-bottom: 5px;}
+
+            #cartCJ tr{
+                font-size:10px;
+                background: #ccf0b2;}
+            #cartCJ th{
+                background: #e67b1c;}
+            #cartDP{
+                width: 100%;
+                height: 100px;
+                background-color: #BB80F7;
+                bottom: 5px;
+                right: 1px;
+                text-align: center;
+                font-size:10px;
+                border-collapse: collapse;
+            }
+            #cartDP td {
+	            font-size:10px;
+	            border:1px solid #fefffc;
+	            padding:3px 7px 2px 7px;}
+            #cartDP caption{
+                font-size:10px;
+                margin-bottom: 5px;}
+
+            #cartDP tr{
+                font-size:10px;
+                background: #ccf0b2;}
+            #cartDP th{
+                background: #e67b1c;}
+             #map{
+                width: 50%;
+                height: 400px;
+                background-color: #C5E9F3;
+                /*定义浮动，不定义的话，界面会乱*/
+                float: left;
+            }
+            #DPmap{
+                width: 50%;
+                height: 400px;
+                background-color: #C5E9F3;
+                /*定义浮动，不定义的话，界面会乱*/
+                float: left;
+            }
+             #map{
+                width: 50%;
+                height: 400px;
+                background-color: #C5E9F3;
+                /*定义浮动，不定义的话，界面会乱*/
+                float: left;
+            }
+            #DPmap{
+                width: 50%;
+                height: 400px;
+                background-color: #C5E9F3;
+                /*定义浮动，不定义的话，界面会乱*/
+                float: left;
+            }
+
+            #chart_alarm{
+                width: 50%;
+                height: 400px;
+                background-color: #F7575d;
+                float: right;
+            }
+            #chart_alarmDP{
+                width: 50%;
+                height: 400px;
+                background-color: #F7575d;
+                float: right;
+            }
+            #CJTS{
+                width: 49.3%;
+                height: 450px;
+                background-color: #BB80F7;
+                bottom: 2px;
+                right: 2px;
+                text-align: center;
+                font-size: 0.2rem;
+                border-collapse: collapse;
+                float:left;
+                padding:2px;
+            }
+           #CJDJ{
+                width: 49.3%;
+                height: 450px;
+                background-color: #BB80F7;
+                bottom: 2px;
+                left: 2px;
+                text-align: center;
+                font-size: 0.2rem;
+                border-collapse: collapse;
+                float:right;
+                padding:2px;
+            }
+           #CJDJzz{
+                width: 49.3%;
+                height: 450px;
+                background-color: #BB80F7;
+                bottom: 2px;
+                right: 2px;
+                text-align: center;
+                font-size: 0.2rem;
+                border-collapse: collapse;
+                float:left;
+                padding:2px;
+            }
+           #CJTSzz{
+                width: 49.3%;
+                height: 450px;
+                background-color: #BB80F7;
+                bottom: 2px;
+                right: 0px;
+                text-align: center;
+                font-size: 0.2rem;
+                border-collapse: collapse;
+                float:right;
+                padding:2px;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="global" style="position: relative;">
+        <div id="map" ></div>
+        <div id="chart_alarm"></div>
+            <hr class="hrLine" style="width:100%;"/>
+            <h2 class="text" style=" width:100%;font-size:20px;font-family:'华文楷体';font-weight:800;" >成交地块明细</h2>
+            <hr class="hrLine" style="width:100%;"/>
+        <table id="cartCJ" >
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>四至</th>
+                <th>方式</th>
+                <th>用途</th>
+                <th>面积</th>
+                <th>容积率</th>
+                <th>起始价</th>
+                <th>成交价</th>
+                <th>获取方</th>
+                <th>竟得日</th>
+                <th>起始楼板价</th>
+                <th>最终楼板价</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        </table>
+             <hr class="hrLine" style="width:100%;"/>
+             <h2 class="box" >
+                 <img style="width: 100px;height: 80px; margin-bottom: -16px;overflow: hidden" src="./echarts/lvdelv.gif"/>
+                 <img style="width: 90px;height: 90px; margin-bottom: -20px;overflow: hidden" src="http://b339.photo.store.qq.com/psb?/V13A2daL0cmkBR/nk0lR9v0Da3XDFhnfbKL736oV6TlbC2k0laH9sFpxS4!/c/dFMBAAAAAAAA&bo=AgECAQIBAgERADc!" />
+                 <h2 class="text" style=" width:100%;font-size:10px;font-family:'华文楷体';font-weight:800;" >版权 © 永动鸡(公众号)&扫码关注&</h2>
+             </h2>
+             <hr class="hrLine" style="width:100%;"/>
+        <div id="DPmap" ></div>
+        <div id="chart_alarmDP"></div>
+             <hr class="hrLine" style="width:100%;"/>
+             <h2 class="text" style=" width:100%;font-size:20px;font-family:'华文楷体';font-weight:800;" >待拍地块明细</h2>
+             <hr class="hrLine" style="width:100%;"/>
+        <table id="cartDP" >
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>四至</th>
+                <th>方式</th>
+                <th>用途</th>
+                <th>面积</th>
+                <th>容积率</th>
+                <th>起始价</th>
+                <th>起始楼板价</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        </table>
+        <hr class="hrLine" style="width:100%;"/>
+             <h2 class="box" >
+                <img style="width: 100px;height: 80px; margin-bottom: -16px;overflow: hidden" src="./echarts/lvdelv.gif"/>
+                <img style="width: 90px;height: 90px; margin-bottom: -20px;overflow: hidden" src="http://b339.photo.store.qq.com/psb?/V13A2daL0cmkBR/nk0lR9v0Da3XDFhnfbKL736oV6TlbC2k0laH9sFpxS4!/c/dFMBAAAAAAAA&bo=AgECAQIBAgERADc!" />
+                <h2 class="text" style=" width:100%;font-size:10px;font-family:'华文楷体';font-weight:800;" >版权 © 永动鸡(公众号)&扫码关注&</h2>
+             </h2>
+        <hr class="hrLine" style="width:100%;"/>
+        <h2 class="text" style=" width:100%;font-size:20px;font-family:'华文楷体';font-weight:800;" >住宅市场</h2>
+        <hr class="hrLine" style="width:100%;"/>
+        <div id="CJTS"></div>
+        <div id="CJDJ"></div>
+        <div id="CJDJzz"></div>
+        <div id="CJTSzz"></div> 
+    </div>
+    <script src='./js/TJtudi.js'></script>
+    <script src='./js/MapGEO.js'></script>
+    <script src='./js/FFXX.js'></script>
+</body>
+</html>
